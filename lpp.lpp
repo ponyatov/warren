@@ -1,0 +1,8 @@
+%{
+#include "hpp.hpp"
+%}
+%option noyywrap
+%option yylineno
+%%
+[a-zA-Z0-9._]+		TOC(Sym,SYM)
+%%
