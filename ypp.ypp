@@ -3,6 +3,13 @@
 %}
 %defines %union { Sym*o; }
 %token <o> SYM
+%token <o> LQ RQ
+%token <o> EQ
+%type <o> ex scalar bracket op
 %%
-REPL : | REPL SYM { cout << $2->dump(); } ;
+REPL : | REPL ex { cout << $2->dump(); } ;
+ex : scalar | bracket | op ;
+scalar : SYM ;
+bracket : LQ | RQ ;
+op : EQ ;
 %%

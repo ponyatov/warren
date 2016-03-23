@@ -4,5 +4,13 @@
 %option noyywrap
 %option yylineno
 %%
+#[^\n]*\n			{}
+
 [a-zA-Z0-9._]+		TOC(Sym,SYM)
+
+\[					TOC(Sym,LQ)
+\]					TOC(Sym,RQ)
+
+\=					TOC(Sym,EQ)
+
 %%
