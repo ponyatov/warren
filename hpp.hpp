@@ -10,8 +10,13 @@ using namespace std;
 struct Sym {
 	string val;
 	Sym(string);
-	virtual string dump();
+	virtual string tagval();
+	string pad(int);
+	virtual string dump(int=0);
+	vector<Sym*> nest; void push(Sym*);
 };
+
+struct List: Sym { List(); string tagval(); };
 
 extern int yylex();
 extern int yylineno;

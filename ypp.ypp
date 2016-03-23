@@ -5,11 +5,16 @@
 %token <o> SYM
 %token <o> LQ RQ
 %token <o> EQ
-%type <o> ex scalar bracket op
+%type <o> ex scalar op list
 %%
-REPL : | REPL ex { cout << $2->dump(); } ;
-ex : scalar | bracket | op ;
+REPL : | REPL ex 	{ cout << $2->dump(); } ;
+ex : scalar | op
+	| LQ list RQ	{ $$=$2; }
+	| ex op ex		{ $$=$2; $$->push($1); $$->push($3); }
+;
 scalar : SYM ;
-bracket : LQ | RQ ;
 op : EQ ;
+list :				{ $$=new List(); }
+	| list ex 		{ $$=$1; $$->push($2); }
+;
 %%

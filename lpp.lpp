@@ -4,7 +4,7 @@
 %option noyywrap
 %option yylineno
 %%
-#[^\n]*\n			{}
+#[^\n]*				{}
 
 [a-zA-Z0-9._]+		TOC(Sym,SYM)
 
@@ -13,4 +13,5 @@
 
 \=					TOC(Sym,EQ)
 
+[ \t\r\n]+			{}
 %%
